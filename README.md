@@ -4,8 +4,7 @@
 
 Welcome to the source code of my personal portfolio. This is not a standard template; it is a custom-built, interactive web experience designed to showcase my skills in Front-End Development, UI/UX, and Applied Artificial Intelligence (LLMs).
 
-🔗 **[View Live Site](https://your-vercel-link-here.vercel.app)** *(Replace with your actual Vercel link once deployed)*
-
+🔗 **https://dhruv-portfolio-3ke70f6sa-danesdave2023-4342s-projects.vercel.app**
 ---
 
 ## 🚀 Features

@@ -407,24 +407,6 @@ textarea::placeholder {
     border-color: var(--text-main);
 }
 
-/* --- AI Features UI --- */
-.ai-action-btn {
-    background: transparent;
-    color: var(--text-main);
-    border: 1px solid var(--border-light);
-    border-radius: 100px;
-    padding: 6px 14px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
-}
-
-.ai-action-btn:hover {
-    background: var(--text-main);
-    color: #000;
-}
 
 .floating-chat-btn {
     position: fixed;
@@ -523,8 +505,24 @@ textarea::placeholder {
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-    .nav-links { display: none; }
-    nav { justify-content: center; }
+    nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 1rem 4vw;
+        align-items: center;
+    }
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        max-width: 100%;
+        padding-bottom: 4px;
+        scrollbar-width: none; /* Hide scrollbar for clean aesthetic */
+        -webkit-overflow-scrolling: touch;
+    }
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
     .work-grid { grid-template-columns: 1fr; }
     .list-row { flex-direction: column; gap: 10px; }
     .chat-window { width: calc(100% - 8vw); right: 4vw; }

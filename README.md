@@ -13,7 +13,6 @@ This portfolio goes beyond static text by integrating live AI features to demons
 
 * 🤖 **System Agent (Gemini API):** An embedded, floating chatbot trained on my personal context (resume, projects, skills). Recruiters can "interview" the bot to learn about my background.
 * 🎯 **Recruiter Playground:** A dynamic section where visitors can paste a Job Description (JD). The AI analyzes the JD against my profile and outputs a Match Score and alignment summary.
-* ✨ **AI Project Actions:** Interactive "Simplify" and "Roadmap" buttons on project cards that use LLMs to translate technical jargon into plain English or suggest future architectural improvements on the fly.
 * 🎨 **Editorial UI/UX:** A simple, dark-amber aesthetic featuring custom CSS, noise textures and a responsive Bento-box grid layout—built entirely with Vanilla HTML/CSS (no external frameworks).
 
 ---

@@ -167,8 +167,7 @@ nav {
 .hero-left-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-top: 6vh; /* Shifts the Name text down to align with photo shoulders/face */
+    justify-content: flex-end;
     padding-bottom: 10px;
 }
 
@@ -180,6 +179,7 @@ nav {
     color: var(--text-main);
     line-height: 0.85;
     letter-spacing: -0.04em;
+    margin-bottom: 2.5rem; /* Space between Name and Bio */
     animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -188,7 +188,6 @@ nav {
     font-weight: 300;
     color: var(--text-muted);
     line-height: 1.8;
-    margin-top: auto; /* Push to bottom of left column */
     animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 

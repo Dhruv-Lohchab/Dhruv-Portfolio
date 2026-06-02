@@ -367,7 +367,7 @@ section {
 }
 
 .project-card {
-    background: #ebdcd0; /* Premium solid warm cream-beige card background */
+    background: rgba(235, 220, 208, 0.35); /* Translucent warm cream-beige */
     border: 1px solid rgba(26, 10, 0, 0.1);
     border-radius: 16px;
     padding: 45px;
@@ -377,6 +377,8 @@ section {
     position: relative;
     overflow: hidden;
     color: #1a0a00; /* Deep chocolate brown text */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .project-card::before {

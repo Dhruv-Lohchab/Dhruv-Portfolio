@@ -156,7 +156,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 15vh; /* Shifts the name down to align with photo shoulders/chest */
+    padding-top: 10vh; /* Shifts the name down slightly to align with photo */
     padding-bottom: 10px;
 }
 

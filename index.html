@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dhruv | Aspiring AI Engineer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
+
 <body>
 
     <nav>
@@ -13,22 +20,30 @@
         <div class="nav-links">
             <a href="#work">Work</a>
             <a href="#skills">Skills</a>
-            <a href="#playground">Recruiter Playground</a>
+            <a href="#about-me">About Me</a>
+            <a href="#playground">Playground</a>
             <a href="#connect">Get in touch</a>
-            <a href="resume.pdf" target="_blank">Resume</a>
-            <a href="about.html">About Dhruv</a>
+            <a href="Dhruv_Resume.pdf" target="_blank">Resume</a>
         </div>
     </nav>
 
     <div class="container">
-        
+
         <section class="hero" id="home">
-            <div class="hero-content">
-                <h1>Hi, I'm Dhruv <br><span class="hero-role">Aspiring AI Engineer <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span></h1>
-                <p class="hero-bio">
-                    Enthusiastic learner, driven to explore innovative and emerging AI techniques. Strong analytical mindset with interest in artificial intelligence, natural language processing, and model experimentation. Eager to develop impactful solutions that solve real-world problems.
-                </p>
-                <a href="resume.pdf" class="hero-btn" target="_blank" style="background: transparent; margin-top: 0;">View Resume</a>
+            <div class="hero-grid-split">
+                <div class="hero-left-col">
+                    <h1 class="hero-name-editorial">DHRUV</h1>
+                    <p class="hero-bio-editorial">
+                        Enthusiastic learner, driven to explore innovative and emerging AI techniques. Strong analytical
+                        mindset with interest in artificial intelligence, natural language processing, and model
+                        experimentation. Eager to develop impactful solutions that solve real-world problems.
+                    </p>
+                </div>
+                <div class="hero-right-col">
+                    <div class="portrait-frame-editorial">
+                        <img src="photo-3.jpeg" alt="Dhruv" class="hero-portrait-editorial">
+                    </div>
+                </div>
             </div>
 
             <div class="hero-massive">
@@ -41,37 +56,46 @@
         <section id="work">
             <h2 class="section-header">Work</h2>
             <div class="work-grid">
-                
-                <div class="project-card" id="project-wisearch">
+
+                <div class="project-card large-card" id="project-wisearch">
                     <h3>WiSearch</h3>
                     <p class="project-desc">
-                        A semantic retrieval system designed to solve vocabulary mismatch. Implemented dense vector embeddings using Transformer models and FAISS, enabling accurate and intuitive concept-based discovery across research papers.
+                        An Intelligent Semantic Search Engine designed to solve the "vocabulary mismatch" problem in
+                        academic research, enabling the retrieval of contextually relevant literature based on user
+                        intent and meaning rather than exact keyword matches.
                     </p>
+                    <div class="project-details-list">
+                        <div class="detail-item">
+                            <strong>AI & Backend:</strong> Engineered a high-performance Python/FastAPI microservice
+                            utilizing Sentence Transformers (all-MiniLM-L6-v2) to generate dense vector embeddings,
+                            mapping complex abstracts to high-dimensional semantic spaces.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Search Optimization:</strong> Implemented FAISS (Facebook AI Similarity Search) for
+                            advanced vector indexing and clustering, ensuring highly scalable, sub-second similarity
+                            matching across foundational AI, ML, and Cloud Computing papers.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Full-Stack & UX:</strong> Designed a responsive React, TypeScript, and Tailwind CSS
+                            frontend featuring a fault-tolerant dual-pipeline architecture and a polished interface
+                            using Framer Motion.
+                        </div>
+                    </div>
                     <div class="tags">
-                        <span class="tag">Python</span><span class="tag">FAISS</span><span class="tag">BERT</span>
+                        <span class="tag">Python</span><span class="tag">FastAPI</span><span
+                            class="tag">FAISS</span><span class="tag">Sentence Transformers</span><span
+                            class="tag">React</span><span class="tag">TypeScript</span>
                     </div>
                 </div>
 
-                <div class="project-card" id="project-khelo">
-                    <h3>KheloKhiladi</h3>
-                    <p class="project-desc">
-                        An AI-driven mobile platform that makes elite sports scouting accessible. Using a smartphone camera, the platform analyzes user skills, allowing them to complete automated performance tests and track progress.
-                    </p>
-                    <div class="tags">
-                        <span class="tag">Computer Vision</span><span class="tag">Mobile AI</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Rakshak</h3>
-                    <p class="project-desc">A POSH act-based application currently in development for educational institutions. It provides a safe, anonymous, and fast way to report incidents of bullying and harassment.</p>
-                    <div class="tags"><span class="tag">Social Impact</span></div>
-                </div>
-
-                <div class="project-card">
+                <div class="project-card" id="project-bhasha">
                     <h3>Bhasha Translate</h3>
-                    <p class="project-desc">A simple desktop bidirectional text translation application between English and Hindi. Built thoughtfully to ensure smooth, lightweight performance.</p>
-                    <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span></div>
+                    <p class="project-desc">A simple desktop bidirectional text translation application between English
+                        and Hindi. Built thoughtfully using Python and NLP frameworks to ensure smooth, lightweight
+                        performance.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span><span class="tag">NLP</span>
+                    </div>
                 </div>
 
             </div>
@@ -81,73 +105,66 @@
             <h2 class="section-header">Skills</h2>
             <div>
                 <div class="list-row">
-                    <div class="list-label">Languages & Core</div>
-                    <div class="list-content">Python, Prompt Engineering, Data Structures</div>
+                    <div class="list-label">Languages</div>
+                    <div class="list-content">Python (Primary), SQL</div>
                 </div>
                 <div class="list-row">
-                    <div class="list-label">Libraries & Frameworks</div>
-                    <div class="list-content">NumPy, Pandas, FAISS, Sentence Transformers (BERT)</div>
-                </div>
-                <div class="list-row">
-                    <div class="list-label">Tools</div>
-                    <div class="list-content">VS Code, Google Colab, Kaggle, Git/GitHub</div>
+                    <div class="list-label">Technologies & Libraries</div>
+                    <div class="list-content">VS Code, Google Colab, Kaggle, Git/GitHub, NumPy, Pandas, FAISS, Sentence
+                        Transformers (BERT)</div>
                 </div>
             </div>
         </section>
 
-        <section id="education">
-            <div class="edu-cert-container">
-                
-                <div class="edu-cert-column">
-                    <h2 class="section-header" style="margin-bottom: 40px;">Education</h2>
-                    <div class="modern-timeline">
-                        <div class="mt-item">
-                            <div class="mt-title">B.Tech. Computer Science Engineering</div>
-                            <div class="mt-subtitle">Currently Pursuing, 3rd Year | Year of Passing : 2027 |<br>Cumulative SGPA : 8.32 (Till 5th Sem)</div>
-                            <div class="mt-institution">Manav Rachna University, Faridabad</div>
-                        </div>
-                        <div class="mt-item">
-                            <div class="mt-title">Class XII</div>
-                            <div class="mt-subtitle">Year of Passing : 2022 | Percentage : 91 %</div>
-                            <div class="mt-institution">Delhi Public School Refinery Panipat</div>
-                        </div>
-                        <div class="mt-item">
-                            <div class="mt-title">Class X</div>
-                            <div class="mt-subtitle">Year of Passing : 2020 | Percentage : 90.8 %</div>
-                            <div class="mt-institution">Delhi Public School Refinery Panipat</div>
-                        </div>
+        <section id="about-me" class="about-section">
+            <h2 class="section-header">About Me</h2>
+            <div class="about-grid">
+                <div class="about-story">
+                    <h3 class="story-title">Curiosity, Code & Cognition</h3>
+                    <p class="story-paragraph">
+                        My journey into technology began with a fundamental question: <em>How can we build systems that
+                            truly understand and augment human capabilities?</em> As a third-year Computer Science
+                        student, I have channelled this curiosity into exploring natural language processing, computer
+                        vision, and the art of prompt engineering.
+                    </p>
+                    <p class="story-paragraph">
+                        I don't just write code; I design experiences where technology feels intuitive. Whether it is
+                        solving vocabulary mismatches through semantic retrieval algorithms or mapping physical athletic
+                        performance with smartphone vision models, my focus is always on real-world impact and
+                        high-quality user experiences.
+                    </p>
+                    <p class="story-paragraph">
+                        Beyond the screen, I am a continuous experimenter, always learning from community discussions,
+                        exploring prompt design techniques with LangChain, and testing new open-source models.
+                    </p>
+                    <div class="about-cta">
+                        <a href="Dhruv_Resume.pdf" class="hero-btn" target="_blank"
+                            style="background: transparent; margin-top: 20px;">Download Full Resume (PDF)</a>
                     </div>
                 </div>
-
-                <div class="edu-cert-column">
-                    <h2 class="section-header" style="margin-bottom: 40px;">Training & Certifications</h2>
-                    <div class="modern-timeline">
-                        <div class="mt-item">
-                            <div class="mt-title">Salesforce AI with Agentforce Champion Program</div>
-                            <div class="mt-subtitle">Salesforce (Trailhead)</div>
-                        </div>
-                        <div class="mt-item">
-                            <div class="mt-title">Prompt Engineering with LangChain</div>
-                            <div class="mt-subtitle">LinkedIn Learning</div>
-                        </div>
-                        <div class="mt-item">
-                            <div class="mt-title">Artificial Intelligence Foundations</div>
-                            <div class="mt-subtitle">LinkedIn Learning</div>
-                        </div>
+                <div class="about-gallery">
+                    <div class="gallery-col">
+                        <img src="photo-2.jpeg" alt="Dhruv at work" class="gallery-image img-1">
+                        <img src="photo-3.jpeg" alt="Dhruv studying" class="gallery-image img-2">
+                    </div>
+                    <div class="gallery-col">
+                        <img src="photo-4.jpeg" alt="Dhruv thinking" class="gallery-image img-3">
                     </div>
                 </div>
-
             </div>
         </section>
 
         <section id="playground">
             <h2 class="section-header">Recruiter Playground</h2>
             <div class="playground-area">
-                <textarea id="jdInput" placeholder="Paste a Job Description here to see how my profile matches the role..."></textarea>
-                <button class="hero-btn" id="analyzeBtn" onclick="analyzeFit()" style="margin: 0; background: transparent;">✨ Analyze Alignment</button>
-                
+                <textarea id="jdInput"
+                    placeholder="Paste a Job Description here to see how my profile matches the role..."></textarea>
+                <button class="hero-btn" id="analyzeBtn" onclick="analyzeFit()"
+                    style="margin: 0; background: transparent;">✨ Analyze Alignment</button>
+
                 <div id="matchResult" class="match-result">
-                    <div style="margin-bottom: 10px; font-weight: 500; text-transform: uppercase; font-size: 0.85rem;">System Output</div>
+                    <div style="margin-bottom: 10px; font-weight: 500; text-transform: uppercase; font-size: 0.85rem;">
+                        System Output</div>
                     <div id="matchContent" style="font-size: 1.1rem; font-weight: 300; white-space: pre-wrap;"></div>
                 </div>
             </div>
@@ -156,10 +173,12 @@
         <section id="connect" class="connect-section">
             <div class="connect-heading">LET'S BUILD SOMETHING.</div>
             <br>
-            <div class="connect-sub">Whether it's an internship, a collaboration, or just a curious conversation<br>about AI — I'm always open.</div>
-            
+            <div class="connect-sub">Whether it's an internship, a collaboration, or just a curious
+                conversation<br>about AI — I'm always open.</div>
+
             <div class="email-display" id="emailToCopy">dhruvlohchab22@gmail.com</div>
-            <button class="hero-btn" id="copyBtn" onclick="copyEmail()" style="background: transparent;">COPY EMAIL ADDRESS</button>
+            <button class="hero-btn" id="copyBtn" onclick="copyEmail()" style="background: transparent;">COPY EMAIL
+                ADDRESS</button>
 
             <div class="social-footer">
                 <a href="https://www.linkedin.com/in/dhruv-lohchab" target="_blank">LinkedIn</a>
@@ -180,11 +199,13 @@
             <div class="message bot typing" id="typingIndicator" style="display: none;">Processing...</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Query agent..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <input type="text" id="chatInput" placeholder="Query agent..."
+                onkeypress="if(event.key==='Enter') sendMessage()">
             <span onclick="sendMessage()" style="cursor:pointer; font-weight: bold;">[ SEND ]</span>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

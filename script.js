@@ -2,9 +2,8 @@ const apiKey = ""; // Insert your Gemini API key here
 
 const dhruvContext = `
     Context: Dhruv, 3rd Year B.Tech CSE student at Manav Rachna University. 
-    Skills: Python, Prompt Engineering, NLP (BERT, FAISS), Computer Vision, Git.
-    Projects: WiSearch (Semantic Search), KheloKhiladi (Sports Scouting AI), Rakshak (Safety App), Bhasha Translate.
-    Certifications: LangChain Prompt Engineering, Salesforce Agentforce, AI Foundations.
+    Skills: Languages: Python (Primary), SQL; Technologies & Libraries: VS Code, Google Colab, Kaggle, Git/GitHub, NumPy, Pandas, FAISS, Sentence Transformers (BERT).
+    Projects: WiSearch (Semantic Search retrieval system utilizing Sentence Transformers and FAISS), Bhasha Translate (desktop bidirectional English-Hindi translation app).
 `;
 
 async function fetchGemini(prompt, system) {

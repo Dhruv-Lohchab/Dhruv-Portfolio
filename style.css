@@ -137,7 +137,8 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 20vh; /* 20% top gap from viewport */
+    padding-top: 20vh;
+    /* 20% top gap from viewport */
     position: relative;
 }
 
@@ -145,29 +146,32 @@ nav {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
     gap: 5vw;
-    width: 80vw; /* Strict 80% width, leaving exactly 10% gap on each side */
+    width: 80vw;
+    /* Strict 80% width, leaving exactly 10% gap on each side */
     max-width: 1600px;
     margin: 0 auto;
-    align-items: stretch; /* Stretch left column to match photo height */
+    align-items: stretch;
+    /* Stretch left column to match photo height */
     animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-left-col {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-top: 10vh; /* Shifts the name down slightly to align with photo */
     padding-bottom: 10px;
 }
 
 .hero-name-editorial {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 900;
-    font-size: clamp(5rem, 8vw, 8.5rem); /* Increased size */
+    font-size: clamp(5rem, 8vw, 8.5rem);
+    /* Increased size */
     text-transform: uppercase;
     color: var(--text-main);
     line-height: 0.85;
     letter-spacing: -0.04em;
+    margin-top: auto;
+    margin-bottom: auto;
     animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -176,7 +180,6 @@ nav {
     font-weight: 300;
     color: var(--text-muted);
     line-height: 1.8;
-    margin-top: auto; /* Push to bottom of left column */
     animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
@@ -190,13 +193,15 @@ nav {
 /* Elegant Portrait Frame - Full size uncropped style */
 .portrait-frame-editorial {
     width: 100%;
-    height: auto; /* Display full size, no landscape crop */
-    border-radius: 0; /* Straight edges like Russell Brand's */
+    height: auto;
+    /* Display full size, no landscape crop */
+    border-radius: 0;
+    /* Straight edges like Russell Brand's */
     overflow: hidden;
     position: relative;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg);
-    box-shadow: 
+    box-shadow:
         0 35px 70px rgba(0, 0, 0, 0.65),
         0 0 50px rgba(255, 132, 0, 0.07);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -214,9 +219,11 @@ nav {
 
 .hero-portrait-editorial {
     width: 100%;
-    height: auto; /* Scale height proportionally to display full image */
+    height: auto;
+    /* Scale height proportionally to display full image */
     display: block;
-    image-rendering: auto; /* Smooth photographic scaling */
+    image-rendering: auto;
+    /* Smooth photographic scaling */
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -258,7 +265,8 @@ nav {
 /* Massive Footer Heading */
 .hero-massive {
     width: 100%;
-    margin-top: 80px; /* Generous vertical space below the columns */
+    margin-top: 80px;
+    /* Generous vertical space below the columns */
     margin-bottom: 5vh;
     padding-top: 30px;
 }
@@ -274,7 +282,8 @@ nav {
     text-transform: uppercase;
     line-height: 1;
     color: transparent;
-    -webkit-text-stroke: 1px #ffffff; /* White outline by default */
+    -webkit-text-stroke: 1px #ffffff;
+    /* White outline by default */
     display: block;
     white-space: nowrap;
     letter-spacing: 0.02em;
@@ -282,8 +291,10 @@ nav {
 }
 
 .hero-massive:hover .massive-text {
-    -webkit-text-stroke: 1px #ffffff; /* Keep white outline */
-    color: #ffffff; /* Transition to solid white fill */
+    -webkit-text-stroke: 1px #ffffff;
+    /* Keep white outline */
+    color: #ffffff;
+    /* Transition to solid white fill */
 }
 
 /* --- Premium Buttons --- */
@@ -889,13 +900,15 @@ textarea::placeholder {
     }
 
     .hero {
-        padding-top: 20vh; /* 20% top gap from viewport on mobile */
+        padding-top: 20vh;
+        /* 20% top gap from viewport on mobile */
     }
 
     .hero-grid-split {
         grid-template-columns: 1fr;
         gap: 3rem;
-        width: 80vw; /* Standard responsive width on mobile */
+        width: 80vw;
+        /* Standard responsive width on mobile */
         margin: 0 auto;
     }
 
@@ -907,6 +920,7 @@ textarea::placeholder {
 
     .hero-name-editorial {
         font-size: clamp(2.8rem, 10vw, 4.5rem);
+        margin-top: 0;
         margin-bottom: 1.5rem;
         text-align: center;
     }

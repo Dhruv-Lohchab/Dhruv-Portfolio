@@ -264,10 +264,9 @@ nav {
 
 /* Massive Footer Heading */
 .hero-massive {
-    width: 100%;
-    margin-top: 80px;
-    /* Generous vertical space below the columns */
-    margin-bottom: 5vh;
+    width: 80vw;
+    max-width: 1600px;
+    margin: 80px auto 5vh auto; /* Centered, matching hero-grid-split layout */
     padding-top: 30px;
 }
 
@@ -277,10 +276,10 @@ nav {
 }
 
 .massive-text {
-    font-size: clamp(3rem, 5.5vw, 6rem);
+    font-size: clamp(2rem, 4.3vw, 4.5rem); /* Decreased font size to prevent overflow */
     font-weight: 700;
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 1.1;
     color: transparent;
     -webkit-text-stroke: 1px #ffffff;
     /* White outline by default */

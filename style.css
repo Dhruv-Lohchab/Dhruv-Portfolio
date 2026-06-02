@@ -363,22 +363,24 @@ section {
 .work-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 2px;
+    background: var(--border-light);
+    border: 1px solid var(--border-light);
 }
 
 .project-card {
-    background: rgba(235, 220, 208, 0.85); /* Warm cream-beige, slightly translucent */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(26, 10, 0, 0.1);
-    border-radius: 16px;
-    padding: 45px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: none;
+    border-radius: 0;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
-    color: #1a0a00; /* Deep chocolate brown text */
+    color: var(--text-main);
 }
 
 .project-card::before {
@@ -388,14 +390,13 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(26, 10, 0, 0.03) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.06) 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(26, 10, 0, 0.25);
+    transform: translateY(-4px);
     box-shadow: 0 20px 40px var(--shadow-color);
 }
 
@@ -418,21 +419,21 @@ section {
 
 .detail-item {
     font-size: 0.98rem;
-    font-weight: 400;
-    color: rgba(26, 10, 0, 0.75);
+    font-weight: 300;
+    color: var(--text-muted);
     line-height: 1.6;
-    border-left: 2px solid rgba(26, 10, 0, 0.15);
+    border-left: 2px solid var(--border-light);
     padding-left: 20px;
     transition: border-color 0.3s ease;
 }
 
 .project-card:hover .detail-item {
-    border-left-color: #1a0a00;
+    border-left-color: var(--accent);
 }
 
 .detail-item strong {
-    color: #1a0a00;
-    font-weight: 600;
+    color: var(--text-main);
+    font-weight: 500;
     display: inline-block;
     margin-bottom: 2px;
 }
@@ -440,19 +441,19 @@ section {
 .project-card h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    color: #1a0a00;
+    letter-spacing: -0.03em;
+    color: var(--text-main);
     z-index: 1;
 }
 
 .project-card p {
     font-size: 1.1rem;
-    font-weight: 400;
-    color: rgba(26, 10, 0, 0.85);
-    margin-bottom: 35px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 40px;
     flex-grow: 1;
     line-height: 1.7;
     z-index: 1;
@@ -466,23 +467,22 @@ section {
 }
 
 .tag {
-    font-size: 0.72rem;
-    padding: 6px 16px;
-    border: 1px solid rgba(26, 10, 0, 0.15);
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border: 1px solid var(--border-light);
     border-radius: 100px;
     text-transform: uppercase;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     letter-spacing: 0.05em;
-    color: rgba(26, 10, 0, 0.7);
+    color: var(--text-muted);
     transition: all 0.3s ease;
     background: transparent;
 }
 
 .project-card:hover .tag {
-    border-color: #1a0a00;
-    color: #1a0a00;
-    background: rgba(26, 10, 0, 0.05);
+    border-color: var(--glass-border);
+    color: var(--text-main);
 }
 
 /* --- Skills List --- */

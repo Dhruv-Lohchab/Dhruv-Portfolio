@@ -316,8 +316,7 @@ function initContactForm() {
         const honeypot = form.querySelector('input[name="_honey"]')?.value;
         if (honeypot) {
             console.warn("Spam filtered: Honeypot caught bot.");
-            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
-            form.reset();
+            showFormFeedback(false, "Submission Rejected: Bot activity detected.", submitBtn, statusMsg);
             return;
         }
 
@@ -325,26 +324,26 @@ function initContactForm() {
         const timeElapsed = Date.now() - pageLoadTime;
         if (timeElapsed < 3000) {
             console.warn("Spam filtered: Form submitted too quickly.");
-            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
-            form.reset();
+            showFormFeedback(false, "Submission Rejected: Please take your time to fill the form naturally.", submitBtn, statusMsg);
             return;
         }
 
         // C. Vulgarity & Sensitive Language filter (Fuck/Shit/etc.)
         if (containsSensitiveLanguage(name) || containsSensitiveLanguage(subject) || containsSensitiveLanguage(message)) {
             console.warn("Spam filtered: Profanity/sensitive language detected.");
-            // Silent drop to prevent spammers from adjusting their payloads
-            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
-            form.reset();
+            showFormFeedback(false, "Sensitive Language: Please remove any inappropriate or sensitive language.", submitBtn, statusMsg);
             return;
         }
 
         // D. Gibberish Name & Email Username checks (e.g. qwedfg, asdfg)
-        if (!isValidName(name) || !isValidEmail(email)) {
-            console.warn("Spam filtered: Gibberish name/email detected.");
-            // Silent drop
-            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
-            form.reset();
+        if (!isValidName(name)) {
+            console.warn("Spam filtered: Gibberish name detected.");
+            showFormFeedback(false, "Name Invalid: Please enter a valid name.", submitBtn, statusMsg);
+            return;
+        }
+        if (!isValidEmail(email)) {
+            console.warn("Spam filtered: Gibberish/disposable email detected.");
+            showFormFeedback(false, "Email Invalid: Please enter a valid email address.", submitBtn, statusMsg);
             return;
         }
 
@@ -352,8 +351,7 @@ function initContactForm() {
         const spamPattern = /(?:href\s*=|src\s*=|http:\/\/|https:\/\/|www\.)[^\s]*\.(?:ru|su|ua|xyz|cn|top|click|info|tk|cf|gq|ga|ml|men|stream|work|date)/i;
         if (spamPattern.test(message) || spamPattern.test(subject)) {
             console.warn("Spam filtered: Link pattern detected.");
-            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
-            form.reset();
+            showFormFeedback(false, "Content Blocked: Please remove suspicious links or URLs from the message.", submitBtn, statusMsg);
             return;
         }
 

@@ -43,7 +43,7 @@ This portfolio goes beyond static text by integrating live AI elements and premi
   * Developed a modern, fluid React/TypeScript frontend dashboard displaying similarity scores and semantic clusters.
   * Engineered a FastAPI backend layer to serve search results in JSON formats.
 * **Tech Stack:** Python, FastAPI, FAISS, Sentence Transformers (BERT), React, TypeScript.
-* **Details page:** [WiSearch Details](dhruv-work-wisearch.html) | [Repository](https://github.com/DaveDanes/wisearch)
+* **Details page:** [WiSearch Details](dhruv-work-wisearch.html) | [Repository](https://github.com/Dhruv-Lohchab/wisearch)
 
 ### 3. Bhasha Translate
 * **Description:** A lightweight desktop translation application providing fast, offline-resilient translation between English and Hindi.
@@ -52,7 +52,7 @@ This portfolio goes beyond static text by integrating live AI elements and premi
   * Programmed a bidirectional swap mechanism that reverses translation direction (English ↔ Hindi) and dynamically swaps the input/output text boxes.
   * Configured a custom Tkinter window with scrollable fields, clean buttons, and validation limits (5,000 character cap).
 * **Tech Stack:** Python, Tkinter GUI, `deep-translator` NLP library, Multi-threading.
-* **Details page:** [Bhasha Details](dhruv-work-bhasha.html) | [Repository](https://github.com/DaveDanes/bhasha-translate)
+* **Details page:** [Bhasha Details](dhruv-work-bhasha.html) | [Repository](https://github.com/Dhruv-Lohchab/bhasha-translate)
 
 ---
 
@@ -91,4 +91,4 @@ Currently seeking opportunities at the intersection of AI, Natural Language Proc
 
 * 📧 **Email:** [danesdave2023@gmail.com](mailto:danesdave2023@gmail.com)
 * 💼 **LinkedIn:** [linkedin.com/in/dhruv-lohchab](https://www.linkedin.com/in/dhruv-lohchab)
-* 🐙 **GitHub:** [github.com/DaveDanes](https://github.com/DaveDanes)
+* 🐙 **GitHub:** [github.com/Dhruv-Lohchab](https://github.com/Dhruv-Lohchab)

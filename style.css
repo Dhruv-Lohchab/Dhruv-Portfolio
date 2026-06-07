@@ -169,15 +169,25 @@ nav {
     transform: scale(1.1);
 }
 
-.theme-toggle svg {
-    width: 18px;
-    height: 18px;
-    stroke: currentColor;
-    transition: transform 0.5s ease;
+.theme-emoji {
+    font-size: 1.25rem;
+    font-family: inherit;
+    line-height: 1;
+    display: inline-block;
+    color: initial !important;
+    filter: none !important;
+    opacity: 1 !important;
+    font-style: normal;
+    text-shadow: none !important;
+    transition: transform 0.2s ease;
 }
 
-.theme-toggle:active svg {
-    transform: rotate(45deg);
+.theme-toggle:hover .theme-emoji {
+    transform: scale(1.1);
+}
+
+.theme-toggle:active .theme-emoji {
+    transform: scale(0.9);
 }
 /* --- Hero Section --- */
 .hero {

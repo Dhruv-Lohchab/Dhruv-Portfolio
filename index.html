@@ -17,6 +17,15 @@
 </head>
 
 <body>
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem('theme');
+            const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        })();
+    </script>
 
     <nav>
         <a href="#home" class="nav-home">Home</a>
@@ -25,13 +34,10 @@
             <a href="Dhruv_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             <a href="#playground">Playground</a>
             <a href="about.html">About Me</a>
-            <a href="#connect">Get in touch</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
+                <span class="theme-emoji">🌞</span>
             </button>
+            <a href="#connect">Get in touch</a>
         </div>
     </nav>
 

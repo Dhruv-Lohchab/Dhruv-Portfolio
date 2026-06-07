@@ -121,7 +121,7 @@ async function analyzeFit() {
     }
 
     if (!apiKey) {
-        content.innerText = "The PlayGround is underdevlopment !";
+        content.innerText = "The Playground is currently under development!";
         resultDiv.style.display = 'block';
         return;
     }
@@ -136,7 +136,8 @@ async function analyzeFit() {
         content.innerText = response;
         resultDiv.style.display = 'block';
     } catch (e) { 
-        content.innerText = `Error: ${e.message || "System error during analysis."}`; 
+        console.error("Fit analysis error:", e);
+        content.innerText = "An error occurred during fit analysis. Please try again or email me directly at danesdave2023@gmail.com.";
         resultDiv.style.display = 'block';
     }
     finally { btn.innerText = "✨ ANALYZE ALIGNMENT"; btn.disabled = false; }
@@ -159,7 +160,7 @@ async function sendMessage() {
     if (!apiKey) {
         setTimeout(() => {
             typingIndicator.style.display = 'none';
-            addMsg("The Chatbot is resting ! Pls feel free to mail me at danesdave2023@gmail.com", 'bot');
+            addMsg("The Chatbot is resting! Please feel free to email me at danesdave2023@gmail.com.", 'bot');
         }, 800);
         return;
     }
@@ -170,8 +171,9 @@ async function sendMessage() {
         typingIndicator.style.display = 'none';
         addMsg(res, 'bot');
     } catch(e) { 
+        console.error("Chatbot response error:", e);
         typingIndicator.style.display = 'none';
-        addMsg("The Chatbot is resting ! Pls feel free to mail me at danesdave2023@gmail.com", 'bot'); 
+        addMsg("The Chatbot is resting! Please feel free to email me at danesdave2023@gmail.com.", 'bot'); 
     }
 }
 
@@ -231,6 +233,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentTheme = getPreferredTheme();
         btn.innerHTML = currentTheme === 'light' ? moonEmoji : sunEmoji;
     }
+    
+    // Programmatic Chatbot Event Listeners
+    const chatBtn = document.querySelector('.floating-chat-btn');
+    if (chatBtn) {
+        chatBtn.addEventListener('click', toggleChat);
+    }
+    const closeChatBtn = document.getElementById('closeChatBtn');
+    if (closeChatBtn) {
+        closeChatBtn.addEventListener('click', toggleChat);
+    }
+    const sendChatBtn = document.getElementById('sendChatBtn');
+    if (sendChatBtn) {
+        sendChatBtn.addEventListener('click', sendMessage);
+    }
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+
+    // Role fit and copy buttons programmatic wiring
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', analyzeFit);
+    }
+    const copyBtn = document.getElementById('copyBtn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', copyEmail);
+    }
+
     initSectionPerformance();
     initContactForm();
 });
@@ -470,13 +505,13 @@ function containsSensitiveLanguage(str) {
     return false;
 }
 
-// Check if name is reasonable and not mash
+// Check if name is reasonable and not mash (inclusive of Unicode/accented characters)
 function isValidName(name) {
     const trimmed = name.trim();
     if (trimmed.length < 2 || trimmed.length > 50) return false;
     
-    // Name must consist of letters, spaces, hyphens, periods, or apostrophes
-    const nameRegex = /^[a-zA-Z\s'\-\.]+$/;
+    // Name must consist of Unicode letters, spaces, hyphens, periods, or apostrophes
+    const nameRegex = /^[\p{L}\p{M}\s'\-\.]+$/u;
     if (!nameRegex.test(trimmed)) return false;
     
     if (hasKeyboardMash(trimmed)) return false;
@@ -489,6 +524,10 @@ function isValidName(name) {
 function isValidEmail(email) {
     const trimmed = email.trim();
     if (!trimmed) return false;
+    
+    // Pre-validate standard RFC email format
+    const emailFormatRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailFormatRegex.test(trimmed)) return false;
     
     const parts = trimmed.split('@');
     if (parts.length !== 2) return false;

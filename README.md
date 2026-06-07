@@ -80,8 +80,7 @@ To ensure a seamless user experience, the website utilizes advanced frontend opt
 ├── script.js                   # IntersectionObserver performance engine, copy tool, Gemini API logic
 ├── Dhruv_Resume.pdf            # Curated professional resume (PDF)
 ├── photo-3.png                 # Main portfolio banner/hero image
-├── photo-4.jpeg                # About page profile portrait
-└── photo-2.jpeg                # Creative exploration asset
+└── photo-4.jpeg                # About page profile portrait
 ```
 
 ---

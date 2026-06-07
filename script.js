@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Section performance optimization - unloads/clears rendering memory for offscreen sections
 function initSectionPerformance() {
-    const sections = document.querySelectorAll('section, .about-profile-grid, .about-values-section, .about-outside');
+    const sections = document.querySelectorAll('section, .about-profile-grid, .about-values-section');
     if (!('IntersectionObserver' in window)) return;
     
     const observer = new IntersectionObserver((entries) => {

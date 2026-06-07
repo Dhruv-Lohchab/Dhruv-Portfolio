@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.innerHTML = currentTheme === 'light' ? sunIcon : moonIcon;
     }
     initSectionPerformance();
+    initContactForm();
 });
 
 // Section performance optimization - unloads/clears rendering memory for offscreen sections
@@ -263,4 +264,129 @@ function initSectionPerformance() {
     });
     
     sections.forEach(sec => observer.observe(sec));
+}
+
+// Contact form message submission handler with anti-spam filtration
+function initContactForm() {
+    const form = document.querySelector('.contact-form-container');
+    if (!form) return;
+
+    // Record dynamic timestamp for timing-based bot protection
+    const pageLoadTime = Date.now();
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const statusMsg = form.querySelector('.form-status-msg') || document.getElementById('formStatusMsg');
+        const submitBtn = form.querySelector('.form-submit-btn');
+        
+        // Hide previous status message
+        if (statusMsg) {
+            statusMsg.className = 'form-status-msg';
+            statusMsg.style.display = 'none';
+            statusMsg.innerText = '';
+        }
+
+        // 1. Honeypot check (Bot detection)
+        const honeypot = form.querySelector('input[name="_honey"]')?.value;
+        if (honeypot) {
+            console.warn("Honeypot caught a bot submission.");
+            // Silent drop: simulate success to the spam bot
+            showFormFeedback(true, "Message sent successfully!", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // 2. Timing check (Bot detection - humans take >3 seconds to fill a form)
+        const timeElapsed = Date.now() - pageLoadTime;
+        if (timeElapsed < 3000) {
+            console.warn("Timing threshold caught a bot submission.");
+            // Silent drop: simulate success
+            showFormFeedback(true, "Message sent successfully!", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // 3. Obtain input fields
+        const nameInput = form.querySelector('input[name="name"]');
+        const emailInput = form.querySelector('input[name="email"]');
+        const subjectInput = form.querySelector('input[name="subject"]');
+        const messageInput = form.querySelector('textarea[name="message"]');
+
+        const name = nameInput?.value.trim() || "";
+        const email = emailInput?.value.trim() || "";
+        const subject = subjectInput?.value.trim() || "";
+        const message = messageInput?.value.trim() || "";
+
+        if (!name || !email || !subject || !message) {
+            showFormFeedback(false, "Please fill in all fields before sending.", submitBtn, statusMsg);
+            return;
+        }
+
+        // 4. Client-side regex checking for typical spam patterns (e.g. Russia/Crypto/Russian links)
+        const spamPattern = /(?:href\s*=|src\s*=|http:\/\/|https:\/\/|www\.)[^\s]*\.(?:ru|su|ua|xyz|cn|top|click|info|tk|cf|gq|ga|ml|men|stream|work|date)/i;
+        if (spamPattern.test(message) || spamPattern.test(subject)) {
+            console.warn("Spam link pattern detected.");
+            // Silent drop
+            showFormFeedback(true, "Message sent successfully!", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // Disable input elements during request to prevent double submissions
+        submitBtn.disabled = true;
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerText = "SENDING...";
+        const allInputs = form.querySelectorAll('input, textarea');
+        allInputs.forEach(el => el.disabled = true);
+
+        // 5. Build FormData for FormSubmit.co
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("subject", subject);
+        formData.append("message", message);
+        formData.append("_captcha", "false"); // Disable redirect-based recaptcha verification page
+        formData.append("_subject", `Portfolio Message: "${subject}" from ${name}`);
+
+        // Obfuscated email endpoint to prevent scraper bots from harvesting user email address
+        const u = "danesdave2023";
+        const d = "gmail.com";
+        const actionUrl = `https://formsubmit.co/ajax/${u}@${d}`;
+
+        try {
+            const response = await fetch(actionUrl, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                form.reset();
+                showFormFeedback(true, "Thank you! Your message has been sent successfully. I will get back to you shortly.", submitBtn, statusMsg);
+            } else {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.message || `HTTP error ${response.status}`);
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            showFormFeedback(false, "Failed to send message. Please email me directly at danesdave2023@gmail.com.", submitBtn, statusMsg);
+        } finally {
+            allInputs.forEach(el => el.disabled = false);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
+    });
+}
+
+function showFormFeedback(success, text, btn, statusMsg) {
+    if (statusMsg) {
+        statusMsg.innerText = text;
+        statusMsg.className = `form-status-msg ${success ? 'success' : 'error'}`;
+        statusMsg.style.display = 'block';
+    } else {
+        alert(text);
+    }
 }

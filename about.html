@@ -221,23 +221,24 @@
                 </div>
 
                 <!-- Right Column: Contact Form -->
-                <form action="#" class="contact-form-container"
-                    onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                <form class="contact-form-container">
+                    <input type="text" name="_honey" style="display: none;">
                     <div class="form-group">
-                        <input type="text" placeholder="Name" class="form-input" required>
+                        <input type="text" name="name" placeholder="Name" class="form-input" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Email" class="form-input" required>
+                        <input type="email" name="email" placeholder="Email" class="form-input" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Subject" class="form-input" required>
+                        <input type="text" name="subject" placeholder="Subject" class="form-input" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Message" class="form-input" required></textarea>
+                        <textarea name="message" placeholder="Message" class="form-input" required></textarea>
                     </div>
                     <div style="text-align: left;">
                         <button type="submit" class="form-submit-btn">Send Message</button>
                     </div>
+                    <div class="form-status-msg" id="formStatusMsg"></div>
                 </form>
             </div>
         </section>

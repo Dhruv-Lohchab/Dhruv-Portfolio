@@ -17,9 +17,9 @@ This portfolio goes beyond static text by integrating live AI elements and premi
   * *Development Fallback:* During API key absence or development, the playground safely alerts: `"The PlayGround is underdevlopment !"`.
 * 🎨 **Premium Editorial UI/UX:** A bespoke, dark-amber editorial design featuring responsive Bento-box grids, smooth hover transitions (e.g. sliding arrows on navigation links), and theme state toggling (Light/Dark mode) with persistent memory.
 * 📁 **Detailed Project Subpages:** Dedicated detail pages for each core project detailing my contributions, full tech stacks, outcomes, and GitHub commit references.
-* 📬 **Restructured Connect / Contact Grid:** A responsive two-column layout featured on the Home and About pages.
+* 📬 **Restructured Connect / Contact Grid with Bot Protection:** A responsive two-column layout featured on the Home and About pages.
   * *Interactive Cards (Left Column):* Contains copy-to-clipboard Email card with instantaneous SVG visual feedback (success/error icons and tooltip updates without layout shifts), alongside hover-responsive LinkedIn and GitHub link cards.
-  * *Glassmorphic Form (Right Column):* A clean form layout built using CSS Variables for frictionless communication.
+  * *Glassmorphic Form (Right Column):* A clean form layout executing AJAX submissions via an obfuscated email endpoint to FormSubmit.co. Features a hidden honeypot spam trap, submission timing limits, and link regex patterns to filter out automated bot spam while keeping transitions smooth and inline.
 
 ---
 

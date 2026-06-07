@@ -22,9 +22,13 @@ async function fetchGemini(prompt, currentPage, visitedPages) {
                 body: JSON.stringify(body) 
             });
 
+            if (res.status === 404) {
+                throw new Error("Backend API missing. You must run this using 'npx vercel dev' locally to enable the AI.");
+            }
+
             if (!res.ok) {
                 const errData = await res.json().catch(() => ({}));
-                throw new Error(errData.error || `HTTP ${res.status}`);
+                throw new Error(errData.error || `Server Error: HTTP ${res.status}`);
             }
 
             const data = await res.json();
@@ -116,11 +120,10 @@ async function analyzeFit() {
         content.innerText = response;
         resultDiv.style.display = 'block';
     } catch (e) { 
-        console.error("Fit analysis error:", e);
-        content.innerText = "An error occurred during fit analysis. Please try again or email me directly at danesdave2023@gmail.com.";
+        console.error("Playground Error:", e);
+        content.innerText = `Error: ${e.message}\n\nPlease email me directly at danesdave2023@gmail.com.`;
         resultDiv.style.display = 'block';
-    }
-    finally { btn.innerText = "✨ ANALYZE ALIGNMENT"; btn.disabled = false; }
+    } finally { btn.innerText = "✨ ANALYZE ALIGNMENT"; btn.disabled = false; }
 }
 
 
@@ -144,7 +147,7 @@ async function sendMessage() {
     } catch(e) { 
         console.error("Chatbot response error:", e);
         typingIndicator.style.display = 'none';
-        addMsg("The Chatbot is resting! Please feel free to email me at danesdave2023@gmail.com.", 'bot'); 
+        addMsg(`Error: ${e.message}`, 'bot'); 
     }
 }
 

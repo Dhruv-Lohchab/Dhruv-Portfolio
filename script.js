@@ -1,4 +1,4 @@
-const apiKey = ""; // Insert your Gemini API key here
+// Removed exposed API Key for security - requests now go through /api/chat serverless function
 
 const dhruvContext = `
 IDENTITY & PURPOSE:
@@ -41,16 +41,8 @@ if (!visitedPages.includes(currentPage)) {
 }
 
 async function fetchGemini(prompt, system) {
-    if (!apiKey) {
-        throw new Error("API key is not configured. Please insert your Gemini API key in script.js.");
-    }
-    
-    // Using stable alias gemini-2.5-flash for compatibility
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    const body = {
-        contents: [{ parts: [{ text: prompt }] }],
-        systemInstruction: { parts: [{ text: system }] }
-    };
+    const url = '/api/chat';
+    const body = { prompt, system };
 
     for (let delay of [1000, 2000, 4000]) {
         try {
@@ -62,25 +54,19 @@ async function fetchGemini(prompt, system) {
                 body: JSON.stringify(body) 
             });
 
-            // If response is unauthorized, bad request, or not found, fail immediately
             if (!res.ok) {
                 const errData = await res.json().catch(() => ({}));
-                throw new Error(errData.error?.message || `HTTP ${res.status}`);
+                throw new Error(errData.error || `HTTP ${res.status}`);
             }
 
             const data = await res.json();
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-                return data.candidates[0].content.parts[0].text;
+            if (data.text) {
+                return data.text;
             } else {
                 throw new Error("Response was empty or malformed.");
             }
         } catch (e) {
-            // Only retry if it's a network error or transient server failure.
-            // HTTP errors and API key issues are terminal client errors.
-            if (e.message.startsWith("HTTP ") || e.message.includes("API key") || e.message.includes("not configured")) {
-                throw e; 
-            }
-            if (delay === 4000) throw e; // Reached last retry, bubble up error
+            if (delay === 4000) throw e; 
             await new Promise(r => setTimeout(r, delay));
         }
     }
@@ -153,12 +139,6 @@ async function analyzeFit() {
         resultDiv.style.display = 'block';
         return;
     }
-
-    if (!apiKey) {
-        content.innerText = "The Playground is currently under development!";
-        resultDiv.style.display = 'block';
-        return;
-    }
     
     btn.innerText = "✨ PROCESSING...";
     btn.disabled = true;
@@ -190,14 +170,6 @@ async function sendMessage() {
     input.value = '';
     const typingIndicator = document.getElementById('typingIndicator');
     typingIndicator.style.display = 'block';
-
-    if (!apiKey) {
-        setTimeout(() => {
-            typingIndicator.style.display = 'none';
-            addMsg("The Chatbot is resting! Please feel free to email me at danesdave2023@gmail.com.", 'bot');
-        }, 800);
-        return;
-    }
 
     const currentVisited = JSON.parse(sessionStorage.getItem('visitedPages') || '[]');
     const dynamicContext = `

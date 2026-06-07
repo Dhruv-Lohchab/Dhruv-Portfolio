@@ -1229,139 +1229,7 @@ body.light-mode textarea {
 }
 
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 900px) {
-    nav {
-        flex-direction: column;
-        gap: 12px;
-        padding: 1rem 1.5rem;
-        border-radius: 24px;
-        top: 10px;
-    }
 
-    .nav-links {
-        display: flex;
-        gap: 1.2rem;
-        overflow-x: auto;
-        max-width: 100%;
-        padding-bottom: 4px;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-links::-webkit-scrollbar {
-        display: none;
-    }
-
-    .hero {
-        padding-top: 20vh;
-        /* 20% top gap from viewport on mobile */
-    }
-
-    .hero-grid-split {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        width: 80vw;
-        /* Standard responsive width on mobile */
-        margin: 0 auto;
-    }
-
-    .hero-left-col {
-        text-align: center;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .hero-name-editorial {
-        font-size: clamp(2.8rem, 10vw, 4.5rem);
-        margin-top: 0;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-
-    .hero-bio-editorial {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        text-align: center;
-        margin-top: 1.5rem;
-    }
-
-    .hero-right-col {
-        width: 100%;
-        max-width: 450px;
-        margin: 0 auto;
-    }
-
-    .portrait-frame-editorial {
-        width: 100%;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-    }
-
-    .about-gallery {
-        max-width: 450px;
-        margin: 0 auto;
-    }
-
-    .gallery-col:nth-child(2) {
-        margin-top: 0;
-    }
-
-    .work-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-card.large-card {
-        grid-column: span 1;
-    }
-
-    .list-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .playground-area {
-        padding: 30px 20px;
-    }
-
-    .chat-window {
-        width: calc(100% - 8vw);
-        right: 4vw;
-        height: 480px;
-    }
-
-    .massive-text {
-        font-size: 14vw;
-    }
-
-    .about-profile-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        padding: 40px 0;
-    }
-
-    .about-portrait-wrap {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .value-cards-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .about-hero {
-        padding-top: 16vh;
-    }
-
-    .about-hero .greeting {
-        font-size: clamp(2rem, 7vw, 3rem);
-    }
-}
 
 /* --- Restructured Connect / Contact Section --- */
 .connect-grid {
@@ -1540,16 +1408,6 @@ body.light-mode .form-input:focus {
     background: rgba(26, 10, 0, 0.03);
 }
 
-@media (max-width: 900px) {
-    .connect-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .contact-form-container {
-        padding: 30px 20px;
-    }
-}
 
 /* Off-screen section rendering performance optimization */
 .section-offscreen {
@@ -1594,4 +1452,204 @@ body.light-mode .form-status-msg.error {
     background: rgba(220, 38, 38, 0.06);
     border-color: rgba(220, 38, 38, 0.2);
     color: #b91c1c;
+}
+
+
+/* --- Responsive Adjustments --- */
+
+/* ==========================================
+   1. TABLET BREAKPOINT (601px - 1024px)
+   ========================================== */
+@media (min-width: 601px) and (max-width: 1024px) {
+    section { padding: 80px 0; }
+    
+    nav {
+        padding: 0.8rem 1.8rem;
+        left: 3vw;
+        right: 3vw;
+    }
+    .nav-links { gap: 1.2rem; }
+    
+    .hero-grid-split {
+        grid-template-columns: 1fr 1.1fr;
+        width: 90vw;
+        gap: 3vw;
+    }
+    
+    .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .project-card { padding: 30px; }
+    
+    .value-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .connect-grid {
+        grid-template-columns: 1fr 1fr;
+        width: 90vw;
+        gap: 30px;
+    }
+    .contact-form-container { padding: 30px; }
+
+    /* Project Detail Pages */
+    .detail-section {
+        padding: 150px 4vw 80px 4vw;
+    }
+}
+
+/* ==========================================
+   2. MOBILE BREAKPOINT (<= 600px)
+   ========================================== */
+@media (max-width: 600px) {
+    section { padding: 60px 0; }
+    .container { padding: 0 5vw; }
+    
+    nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 1rem 1.5rem;
+        border-radius: 24px;
+        top: 10px;
+        left: 3vw;
+        right: 3vw;
+    }
+    .nav-links {
+        display: flex;
+        gap: 0.95rem;
+        overflow-x: auto;
+        max-width: 100%;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+    
+    .hero { padding-top: 18vh; }
+    .hero-grid-split {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        width: 90vw;
+    }
+    .hero-left-col { text-align: center; }
+    .hero-name-editorial {
+        font-size: clamp(2.8rem, 10vw, 4.5rem);
+        margin: 0 auto 1.5rem auto;
+        text-align: center;
+    }
+    .hero-bio-editorial {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .hero-right-col {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .portrait-frame-editorial {
+        width: 100%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    
+    .about-gallery {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .gallery-col:nth-child(2) { margin-top: 0; }
+    
+    .work-grid { grid-template-columns: 1fr; }
+    .project-card.large-card { grid-column: span 1; }
+    .project-card { padding: 24px; }
+    .project-card h3 { font-size: 1.75rem; }
+    
+    .list-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .playground-area { padding: 30px 20px; }
+    
+    .chat-window {
+        width: calc(100% - 6vw);
+        right: 3vw;
+        height: 450px;
+        bottom: 110px;
+    }
+    
+    .massive-text { font-size: 12vw; }
+    
+    .about-profile-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 40px 0;
+    }
+    .about-portrait-wrap {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    
+    .value-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .value-card { padding: 30px 24px; }
+    
+    .about-hero { padding-top: 16vh; }
+    .about-hero .greeting { font-size: clamp(2rem, 7vw, 3rem); }
+    
+    .connect-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .contact-form-container { padding: 24px; }
+
+    /* Project Detail Pages */
+    .detail-section {
+        padding: 130px 4vw 60px 4vw;
+    }
+    .detail-section h1 {
+        font-size: 2.2rem;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+    }
+    .detail-section .overview {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+    .detail-section h2 {
+        font-size: 1.1rem;
+        margin-top: 35px;
+        margin-bottom: 16px;
+    }
+    .detail-section p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+        margin-bottom: 20px;
+    }
+    .detail-section .contributions {
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+    .detail-section .contributions li {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        padding-left: 20px;
+    }
+    .detail-section .button {
+        margin-top: 25px;
+        padding: 12px 28px;
+    }
 }

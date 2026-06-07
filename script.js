@@ -287,27 +287,7 @@ function initContactForm() {
             statusMsg.innerText = '';
         }
 
-        // 1. Honeypot check (Bot detection)
-        const honeypot = form.querySelector('input[name="_honey"]')?.value;
-        if (honeypot) {
-            console.warn("Honeypot caught a bot submission.");
-            // Silent drop: simulate success to the spam bot
-            showFormFeedback(true, "Message sent successfully!", submitBtn, statusMsg);
-            form.reset();
-            return;
-        }
-
-        // 2. Timing check (Bot detection - humans take >3 seconds to fill a form)
-        const timeElapsed = Date.now() - pageLoadTime;
-        if (timeElapsed < 3000) {
-            console.warn("Timing threshold caught a bot submission.");
-            // Silent drop: simulate success
-            showFormFeedback(true, "Message sent successfully!", submitBtn, statusMsg);
-            form.reset();
-            return;
-        }
-
-        // 3. Obtain input fields
+        // Obtain input fields
         const nameInput = form.querySelector('input[name="name"]');
         const emailInput = form.querySelector('input[name="email"]');
         const subjectInput = form.querySelector('input[name="subject"]');
@@ -318,17 +298,61 @@ function initContactForm() {
         const subject = subjectInput?.value.trim() || "";
         const message = messageInput?.value.trim() || "";
 
+        // Standard validation (blank inputs)
         if (!name || !email || !subject || !message) {
             showFormFeedback(false, "Please fill in all fields before sending.", submitBtn, statusMsg);
             return;
         }
 
-        // 4. Client-side regex checking for typical spam patterns (e.g. Russia/Crypto/Russian links)
+        // Standard name validation (too short)
+        if (name.length < 2) {
+            showFormFeedback(false, "Please enter a valid name (at least 2 characters).", submitBtn, statusMsg);
+            return;
+        }
+
+        // --- Multi-Layered Spam & Bot Filtering ---
+
+        // A. Honeypot check (Bot detection)
+        const honeypot = form.querySelector('input[name="_honey"]')?.value;
+        if (honeypot) {
+            console.warn("Spam filtered: Honeypot caught bot.");
+            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // B. Timing check (Bot detection - humans take >3 seconds to fill a form)
+        const timeElapsed = Date.now() - pageLoadTime;
+        if (timeElapsed < 3000) {
+            console.warn("Spam filtered: Form submitted too quickly.");
+            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // C. Vulgarity & Sensitive Language filter (Fuck/Shit/etc.)
+        if (containsSensitiveLanguage(name) || containsSensitiveLanguage(subject) || containsSensitiveLanguage(message)) {
+            console.warn("Spam filtered: Profanity/sensitive language detected.");
+            // Silent drop to prevent spammers from adjusting their payloads
+            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // D. Gibberish Name & Email Username checks (e.g. qwedfg, asdfg)
+        if (!isValidName(name) || !isValidEmail(email)) {
+            console.warn("Spam filtered: Gibberish name/email detected.");
+            // Silent drop
+            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
+            form.reset();
+            return;
+        }
+
+        // E. Client-side regex checking for typical spam patterns (e.g. Russia/Crypto/Russian links)
         const spamPattern = /(?:href\s*=|src\s*=|http:\/\/|https:\/\/|www\.)[^\s]*\.(?:ru|su|ua|xyz|cn|top|click|info|tk|cf|gq|ga|ml|men|stream|work|date)/i;
         if (spamPattern.test(message) || spamPattern.test(subject)) {
-            console.warn("Spam link pattern detected.");
-            // Silent drop
-            showFormFeedback(true, "Message sent successfully!", submitBtn, statusMsg);
+            console.warn("Spam filtered: Link pattern detected.");
+            showFormFeedback(true, "Thank you! Your message has been sent successfully.", submitBtn, statusMsg);
             form.reset();
             return;
         }
@@ -340,7 +364,7 @@ function initContactForm() {
         const allInputs = form.querySelectorAll('input, textarea');
         allInputs.forEach(el => el.disabled = true);
 
-        // 5. Build FormData for FormSubmit.co
+        // Build FormData for FormSubmit.co
         const formData = new FormData();
         formData.append("name", name);
         formData.append("email", email);
@@ -389,4 +413,119 @@ function showFormFeedback(success, text, btn, statusMsg) {
     } else {
         alert(text);
     }
+}
+
+// --- Anti-Spam Helpers ---
+
+// Detect common QWERTY keyboard mashing (e.g. asdf, dfg, bvc)
+function hasKeyboardMash(str) {
+    const cleaned = str.toLowerCase().replace(/[^a-z]/g, '');
+    if (cleaned.length < 3) return false;
+    
+    // Mash sequences from QWERTY rows
+    const mashes = [
+        "asd", "sdf", "dfg", "fgh", "ghj", "hjk", "jkl",
+        "ewq", "rew", "ytr", "uyt", "iyu", "oiu", "poi",
+        "dsa", "fds", "gfd", "hgf", "jhg", "kjh", "lkj",
+        "zxc", "xcv", "cvb", "vbn", "bnm", "cxz", "vcx",
+        "bvc", "nbv", "mnb"
+    ];
+    for (const mash of mashes) {
+        if (cleaned.includes(mash)) return true;
+    }
+    
+    // Check for repetitive letters (e.g., aaaa)
+    for (let i = 0; i < cleaned.length - 3; i++) {
+        if (cleaned[i] === cleaned[i+1] && cleaned[i] === cleaned[i+2] && cleaned[i] === cleaned[i+3]) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+// Detect abnormal vowel ratios or long consonant clusters
+function hasGibberishVowels(str) {
+    const cleaned = str.toLowerCase().replace(/[^a-z]/g, '');
+    if (cleaned.length < 4) return false;
+    
+    const vowels = (cleaned.match(/[aeiouy]/g) || []).length;
+    // No vowels at all in a word >= 4 characters
+    if (vowels === 0) return true;
+    
+    // Check for 5 or more consecutive consonants (e.g., rstfg)
+    const consonantCluster = /[^aeiouy]{5,}/i;
+    if (consonantCluster.test(cleaned)) return true;
+    
+    return false;
+}
+
+// Sensitive language / Vulgarity filter
+function containsSensitiveLanguage(str) {
+    if (!str) return false;
+    const s = str.toLowerCase();
+    
+    // Absolute spam substrings (always offensive in any context)
+    const absoluteSpam = ["fuck", "nigger", "faggot", "retard", "cunt", "motherfucker", "whore", "slut", "pussy", "milf", "bastard"];
+    for (const word of absoluteSpam) {
+        if (s.includes(word)) return true;
+    }
+    
+    // Word boundary checks (to avoid false positives on words like assets, class, glass)
+    const boundSpam = ["shit", "shitty", "ass", "asshole", "bitch", "bitches", "porn", "xxx", "dick", "cock", "sex"];
+    for (const word of boundSpam) {
+        const regex = new RegExp(`\\b${word}\\b`, 'i');
+        if (regex.test(s)) return true;
+    }
+    
+    return false;
+}
+
+// Check if name is reasonable and not mash
+function isValidName(name) {
+    const trimmed = name.trim();
+    if (trimmed.length < 2 || trimmed.length > 50) return false;
+    
+    // Name must consist of letters, spaces, hyphens, periods, or apostrophes
+    const nameRegex = /^[a-zA-Z\s'\-\.]+$/;
+    if (!nameRegex.test(trimmed)) return false;
+    
+    if (hasKeyboardMash(trimmed)) return false;
+    if (hasGibberishVowels(trimmed)) return false;
+    
+    return true;
+}
+
+// Check if email username is reasonable and not a spam domain
+function isValidEmail(email) {
+    const trimmed = email.trim();
+    if (!trimmed) return false;
+    
+    const parts = trimmed.split('@');
+    if (parts.length !== 2) return false;
+    
+    const username = parts[0];
+    const domain = parts[1].toLowerCase();
+    
+    if (username.length >= 4) {
+        const lettersOnly = username.replace(/[^a-z]/g, '');
+        if (lettersOnly.length >= 4) {
+            // Need at least one vowel/digit in username
+            const vowels = (username.toLowerCase().match(/[aeiouy0-9]/g) || []).length;
+            if (vowels === 0) return false;
+            
+            if (hasKeyboardMash(username)) return false;
+            if (hasGibberishVowels(username)) return false;
+        }
+    }
+    
+    // Block typical temporary/spam email domains
+    const disposableDomains = [
+        "mailinator.com", "yopmail.com", "10minutemail.com", "tempmail.com", 
+        "guerrillamail.com", "sharklasers.com", "dispostable.com", "getairmail.com",
+        "trashmail.com", "spambox.us"
+    ];
+    if (disposableDomains.includes(domain)) return false;
+    
+    return true;
 }

@@ -1,37 +1,5 @@
 // Removed exposed API Key for security - requests now go through /api/chat serverless function
 
-const dhruvContext = `
-IDENTITY & PURPOSE:
-You are D-Buddy, a highly intelligent, expert-level AI assistant embedded in Dhruv Lohchab's personal portfolio. 
-You possess vast knowledge of software engineering, artificial intelligence, web development, and the modern tech landscape. 
-You are also an absolute expert on Dhruv's background, skills, and projects.
-
-ABOUT DHRUV LOHCHAB:
-- Education: 3rd Year B.Tech CSE at Manav Rachna University (July 2023 - July 2027) with an SGPA of 8.2. Previously scored 91% in Class XII and 90.8% in Class X from Delhi Public School Refinery Panipat.
-- Leadership: Co-Head of Drishti Society (@ DSW 2024-25) and Co-Head of the Media Team (@ MRCPS 2024-25).
-- Hard Skills: Python (Primary), SQL, HTML5, CSS3, JavaScript, React, TypeScript.
-- AI/ML Stack: NumPy, Pandas, Scikit-learn, Matplotlib, FAISS, Sentence Transformers (S-BERT), NLP.
-- Soft Skills: Strategic, Analytical, Creative, Observant, Proactive, Solution-Oriented, Resourceful, Collaborative, Resolute.
-- Tools: VS Code, Git/GitHub, Google Colab, Kaggle.
-- Certifications: Salesforce AI with AgentForce Champion Program, Introduction to AI (LinkedIn), AI Foundations (LinkedIn).
-- Languages: English, Hindi.
-- Contact: Email: dhruvlohchab22@gmail.com / danesdave2023@gmail.com | Phone: +91 87085 32811 | LinkedIn: linkedin.com/in/dhruv-lohchab | GitHub: github.com/Dhruv-Lohchab
-
-PROJECT DEEP DIVES:
-1. WiSearch: A Semantic Search retrieval system built with Sentence Transformers and FAISS for the backend, paired with a modern React/TypeScript frontend. It solves the limitations of strict keyword matching.
-2. Bhasha Translate: A lightweight, offline-resilient desktop bidirectional English-Hindi translation app built with Python (Tkinter) and NLP libraries.
-3. Admetus LifeSciences: A fully responsive, performance-optimized corporate website built from scratch using HTML, CSS, and JS (No heavy frameworks), showcasing elite UI/UX skills.
-
-SOCIAL MEDIA & PROFESSIONAL PRESENCE:
-- GitHub (github.com/Dhruv-Lohchab): Direct users here to view the actual source code, commit history, and architecture of his projects. Highlight that his GitHub demonstrates his clean coding practices, version control proficiency, and open-source mindset.
-- LinkedIn (linkedin.com/in/dhruv-lohchab): Direct recruiters and peers here for professional networking, viewing skill endorsements, and tracking his leadership at Drishti Society.
-
-DYNAMIC PERSONA & TONE INSTRUCTIONS:
-- Dynamic Perspective: Adapt your speaking perspective (1st person "I", 2nd person "You", 3rd person "Dhruv", or a hybrid) based entirely on the user's intent and the natural flow of the conversation. Switch seamlessly depending on what they want.
-- Grounded Advocacy: Answer confidently, but NEVER exaggerate or use hyperbole. Be extremely grounded even when praising Dhruv. Let the technical facts, projects, and architecture speak for themselves. Maintain an intelligent, concise, and highly articulate tone.
-- Technical Expertise: Leverage your vast web knowledge to explain complex concepts (e.g., "What is FAISS?") brilliantly, but immediately anchor them back to how Dhruv utilized them in his projects. Keep responses structured and easy to read.
-`;
-
 // --- Environmental Intelligence Tracking ---
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 let visitedPages = JSON.parse(sessionStorage.getItem('visitedPages') || '[]');
@@ -40,9 +8,9 @@ if (!visitedPages.includes(currentPage)) {
     sessionStorage.setItem('visitedPages', JSON.stringify(visitedPages));
 }
 
-async function fetchGemini(prompt, system) {
+async function fetchGemini(prompt, currentPage, visitedPages) {
     const url = '/api/chat';
-    const body = { prompt, system };
+    const body = { prompt, currentPage, visitedPages };
 
     for (let delay of [1000, 2000, 4000]) {
         try {
@@ -142,11 +110,9 @@ async function analyzeFit() {
     
     btn.innerText = "✨ PROCESSING...";
     btn.disabled = true;
-
-    const system = "You are an AI analyzing a candidate fit. Format cleanly with a Match Score, 3 Strengths, and a brief summary. Keep it strictly professional, no markdown bolding needed.";
     
     try {
-        const response = await fetchGemini(`JD: ${jd}\n\n${dhruvContext}`, system);
+        const response = await fetchGemini(`JD: ${jd}`, currentPage, visitedPages);
         content.innerText = response;
         resultDiv.style.display = 'block';
     } catch (e) { 
@@ -171,20 +137,8 @@ async function sendMessage() {
     const typingIndicator = document.getElementById('typingIndicator');
     typingIndicator.style.display = 'block';
 
-    const currentVisited = JSON.parse(sessionStorage.getItem('visitedPages') || '[]');
-    const dynamicContext = `
-    
-CURRENT ENVIRONMENTAL CONTEXT:
-- The user is currently viewing the page: ${currentPage}
-- The user has previously visited these pages in this session: ${currentVisited.join(', ')}
-
-ENVIRONMENTAL INTELLIGENCE INSTRUCTIONS:
-- You must leverage this environmental context. If they are currently viewing a specific project page (e.g., 'dhruv-work-wisearch.html'), proactively offer custom insights about that specific project or ask if they'd like to know more about its architecture.
-- If they have visited multiple pages, you can subtly reference their journey. Use this context to anticipate what they want to know.
-`;
-    const system = dhruvContext + dynamicContext;
     try {
-        const res = await fetchGemini(text, system);
+        const res = await fetchGemini(text, currentPage, visitedPages);
         typingIndicator.style.display = 'none';
         addMsg(res, 'bot');
     } catch(e) { 

@@ -11,8 +11,9 @@ Welcome to the source code of my personal portfolio. This is a custom-built, int
 
 This portfolio goes beyond static text by integrating live AI elements and premium interactions to demonstrate applied engineering competencies.
 
-* 🤖 **System Agent Chatbot (Gemini API):** An embedded, floating chatbot trained on my personal context (skills, projects, education). Recruiters can "interview" the bot to learn about my background.
-  * *Resilience & Security Fallback:* If the API key is not configured or during connection interrupts, the chatbot gracefully returns: `"The Chatbot is resting ! Pls feel free to mail me at danesdave2023@gmail.com"`.
+* 🤖 **System Agent Chatbot (Gemini API & Serverless):** An embedded "Executive Advocate" chatbot trained to dynamically answer recruiter questions based on my resume. 
+  * *Environmental Intelligence:* The bot tracks which project pages a recruiter visits using `sessionStorage` and proactively offers contextual insights.
+  * *Serverless Security:* API calls are securely proxied through a Vercel Serverless Function (`/api/chat.js`) to protect API keys, prevent token exhaustion, and block prompt injection attacks.
 * 🎯 **Recruiter Alignment Playground:** A dynamic dashboard where visitors can paste a Job Description (JD) to analyze compatibility. The system evaluates the JD against my profile and outputs a Match Score, core strengths, and alignment summary.
   * *Development Fallback:* During API key absence or development, the playground safely alerts: `"The PlayGround is underdevlopment !"`.
 * 🎨 **Premium Editorial UI/UX & Responsive Redesign:** A bespoke, dark-amber editorial design featuring responsive Bento-box grids, smooth hover transitions (e.g. sliding arrows on navigation links), and theme state toggling (Light/Dark mode) with persistent memory. The layout is optimized to be pixel-perfect and fully responsive across three breakpoints: Desktop (>1024px), Tablet (601px - 1024px), and Mobile (<=600px).
@@ -56,7 +57,9 @@ This portfolio goes beyond static text by integrating live AI elements and premi
 
 ---
 
-## ⚡ Technical & Performance Optimizations
+## ⚡ Technical & Security Optimizations
+
+* 🛡️ **Cybersecurity Hardening:** Implemented a `vercel.json` file enforcing strict HTTP security headers including `Strict-Transport-Security` (HSTS), `X-Frame-Options` (Clickjacking defense), and a highly restrictive `Content-Security-Policy` (CSP) to mitigate XSS attacks.
 
 To ensure a seamless user experience, the website utilizes advanced frontend optimization techniques:
 

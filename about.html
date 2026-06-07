@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         <a href="index.html" class="nav-home">Home</a>
         <div class="nav-links">
             <a href="index.html#work">Work</a>
-            <a href="Dhruv_Resume.pdf" target="_blank">Resume</a>
+            <a href="Dhruv_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             <a href="index.html#playground">Playground</a>
             <a href="about.html" style="color: var(--text-main);">About Me</a>
             <a href="index.html#connect">Get in touch</a>
@@ -143,26 +143,102 @@
                     <div class="card-label">Exploring & Creating</div>
                 </div>
                 <div class="outside-card">
-                    <img src="photo-3.jpeg" alt="Dhruv candid">
+                    <img src="photo-3.png" alt="Dhruv candid">
                     <div class="card-label">Capturing Moments</div>
                 </div>
             </div>
         </div>
 
-        <!-- Connect Footer -->
         <section id="connect" class="connect-section">
             <div class="connect-heading">LET'S BUILD SOMETHING.</div>
             <br>
             <div class="connect-sub">Whether it's an internship, a collaboration, or just a curious
                 conversation<br>about AI — I'm always open.</div>
 
-            <div class="email-display" id="emailToCopy">dhruvlohchab22@gmail.com</div>
-            <button class="hero-btn" id="copyBtn" onclick="copyEmail()" style="background: transparent;">COPY EMAIL
-                ADDRESS</button>
+            <div class="connect-grid">
+                <!-- Left Column: Contact Cards -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Email Card -->
+                    <div class="contact-card" style="cursor: default;">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <h4>Email</h4>
+                            <p id="emailToCopy">danesdave2023@gmail.com</p>
+                        </div>
+                        <button class="contact-copy-btn" id="copyBtn" onclick="copyEmail()" title="Copy Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
 
-            <div class="social-footer">
-                <a href="https://www.linkedin.com/in/dhruv-lohchab" target="_blank">LinkedIn</a>
-                <a href="https://github.com/DaveDanes" target="_blank">GitHub</a>
+                    <!-- LinkedIn Card -->
+                    <a href="https://www.linkedin.com/in/dhruv-lohchab" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <h4>LinkedIn</h4>
+                            <p>linkedin.com/in/dhruv-lohchab</p>
+                        </div>
+                    </a>
+
+                    <!-- GitHub Card -->
+                    <a href="https://github.com/DaveDanes" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <h4>GitHub</h4>
+                            <p>github.com/DaveDanes</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right Column: Contact Form -->
+                <form action="#" class="contact-form-container"
+                    onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Message" class="form-input" required></textarea>
+                    </div>
+                    <div style="text-align: left;">
+                        <button type="submit" class="form-submit-btn">Send Message</button>
+                    </div>
+                </form>
             </div>
         </section>
 

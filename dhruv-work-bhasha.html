@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Bhasha Translate – Project Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-home">Home</a>
+        <div class="nav-links">
+            <a href="index.html#work">Work</a>
+            <a href="Dhruv_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href="index.html#playground">Playground</a>
+            <a href="about.html">About Me</a>
+            <a href="index.html#connect">Get in touch</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <section class="detail-section">
+            <h1>Bhasha Translate</h1>
+            <p class="overview">A responsive, lightweight desktop application that translates text between English and Hindi in both directions. Designed with a clean, distraction-free layout and a focus on smooth, non-blocking background execution.</p>
+
+            <h2>My Role &amp; Contributions</h2>
+            <ul class="contributions">
+                <li>Asynchronous Processing – Integrated Python's <code>threading</code> module to execute Google Translate requests in a background thread, preventing UI freezing or "Not Responding" states.</li>
+                <li>Smart Direction Swapping – Programmed a bidirectional swap mechanism that reverses the translation direction (English ↔ Hindi) and automatically exchanges text content between the input and output boxes.</li>
+                <li>Desktop GUI Implementation – Designed and configured a resizable Tkinter window with scrollable source/output fields, custom button palettes, and responsive layouts.</li>
+                <li>Robust Error &amp; Length Handling – Built friendly network connection warning dialogs using Tkinter's <code>messagebox</code> and implemented length validation for inputs up to 5,000 characters.</li>
+            </ul>
+
+            <h2>Tech Stack</h2>
+            <p>Python, Tkinter (GUI), deep-translator (GoogleTranslator API Wrapper), Threading.</p>
+
+            <h2>Outcome</h2>
+            <p>Delivered a polished and responsive translation utility for Windows/macOS that runs efficiently, consumes minimal system resources, and remains perfectly fluid during network delays.</p>
+
+            <a href="https://github.com/DaveDanes/bhasha-translate" target="_blank" rel="noopener noreferrer" class="button">View Repository</a>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

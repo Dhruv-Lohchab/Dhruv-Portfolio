@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv | Aspiring AI Engineer</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dhruv</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
@@ -19,12 +22,13 @@
         <a href="#home" class="nav-home">Home</a>
         <div class="nav-links">
             <a href="#work">Work</a>
-            <a href="Dhruv_Resume.pdf" target="_blank">Resume</a>
+            <a href="Dhruv_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             <a href="#playground">Playground</a>
             <a href="about.html">About Me</a>
             <a href="#connect">Get in touch</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
             </button>
@@ -45,7 +49,7 @@
                 </div>
                 <div class="hero-right-col">
                     <div class="portrait-frame-editorial">
-                        <img src="photo-3.jpeg" alt="Dhruv" class="hero-portrait-editorial">
+                        <img src="photo-3.png" alt="Dhruv" class="hero-portrait-editorial">
                     </div>
                 </div>
             </div>
@@ -61,56 +65,113 @@
             <h2 class="section-header">Work & Experience</h2>
             <div class="work-grid">
 
+                <!-- Project: Admetus -->
                 <div class="project-card large-card" id="project-admetus">
                     <h3>Admetus LifeSciences</h3>
-                    <p class="project-desc">
-                        Designed and developed the full corporate web presence for Admetus LifeSciences — a healthcare
-                        and life sciences firm. Delivered a polished, responsive multi-page website focused on
-                        clear communication of services, team expertise, and client trust.
+                    <p class="brief">Corporate website for a healthcare &amp; life‑sciences firm, showcasing services,
+                        team expertise and client trust. Designed with a premium beige aesthetic and responsive layout.
                     </p>
+
                     <div class="project-details-list">
                         <div class="detail-item">
-                            <strong>Frontend Development:</strong> Built a responsive, performance-optimized website
-                            using semantic HTML5, modular CSS, and vanilla JavaScript — ensuring fast load times
-                            and cross-browser compatibility.
+                            <strong>Responsive Layout</strong> Implemented full‑site responsive layout and UI polish.
                         </div>
                         <div class="detail-item">
-                            <strong>UI/UX Design:</strong> Designed clean, professional layouts with intuitive navigation,
-                            consistent typography, and a carefully curated color palette aligned with the healthcare brand identity.
+                            <strong>Bug Fixes</strong> Resolved React hydration mismatches and cleaned up duplicate
+                            theme scripts.
                         </div>
                         <div class="detail-item">
-                            <strong>Content Architecture:</strong> Structured multi-page information flow for services,
-                            team bios, and contact — prioritizing clarity, accessibility, and conversion-friendly CTAs.
+                            <strong>UI Alignment</strong> Styled and aligned product‑grid cards to achieve consistent
+                            equal heights.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Performance</strong> Optimized carousel sliding behavior and added interactive mouse
+                            controls.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Security</strong> Hardened codebase packages and resolved vulnerabilities via npm
+                            audits.
                         </div>
                     </div>
-                    <div class="tags">
-                        <span class="tag">HTML5</span><span class="tag">CSS3</span><span
-                            class="tag">JavaScript</span><span class="tag">Responsive Design</span><span
-                            class="tag">UI/UX</span>
+
+                    <div class="project-card-footer">
+                        <a href="dhruv-work-admetus.html" class="learn-more">Learn more</a>
+                        <div class="tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Responsive Design</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Project: WiSearch -->
                 <div class="project-card" id="project-wisearch">
                     <h3>WiSearch</h3>
                     <p class="project-desc">
                         An Intelligent Semantic Search Engine designed to solve the "vocabulary mismatch" problem in
-                        academic research, enabling the retrieval of contextually relevant literature based on user
-                        intent and meaning rather than exact keyword matches.
+                        academic research, enabling retrieval of contextually relevant literature based on user intent.
                     </p>
-                    <div class="tags">
-                        <span class="tag">Python</span><span class="tag">FastAPI</span><span
-                            class="tag">FAISS</span><span class="tag">Sentence Transformers</span><span
-                            class="tag">React</span><span class="tag">TypeScript</span>
+
+                    <div class="project-details-list">
+                        <div class="detail-item">
+                            <strong>Semantic Vector Search</strong> Replaced keyword lookup with deep sentence-embedding
+                            similarity algorithms.
+                        </div>
+                        <div class="detail-item">
+                            <strong>FAISS Vector Database</strong> Integrated FAISS database for sub-millisecond
+                            similarity queries across papers.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Interactive Frontend</strong> Created a React & TypeScript dashboard with fluid
+                            animations and responsive layout.
+                        </div>
+                    </div>
+
+                    <div class="project-card-footer">
+                        <a href="dhruv-work-wisearch.html" class="learn-more">Learn more</a>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">FAISS</span>
+                            <span class="tag">Sentence Transformers</span>
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Project: Bhasha Translate -->
                 <div class="project-card" id="project-bhasha">
                     <h3>Bhasha Translate</h3>
-                    <p class="project-desc">A simple desktop bidirectional text translation application between English
-                        and Hindi. Built thoughtfully using Python and NLP frameworks to ensure smooth, lightweight
-                        performance.</p>
-                    <div class="tags">
-                        <span class="tag">Python</span><span class="tag">NLP</span>
+                    <p class="project-desc">
+                        A responsive desktop application that translates text between English and Hindi (both
+                        directions), built with Python, Tkinter, and the deep-translator library.
+                    </p>
+
+                    <div class="project-details-list">
+                        <div class="detail-item">
+                            <strong>Asynchronous Translation</strong> Runs translations in background threads using
+                            Python's <code>threading</code> to prevent UI freezes.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Smart Direction Swapping</strong> Swaps translation direction while automatically
+                            exchanging the input and output text fields.
+                        </div>
+                        <div class="detail-item">
+                            <strong>Input Validation &amp; Errors</strong> Enforces a 5,000 character limit and provides
+                            friendly network connectivity warnings.
+                        </div>
+                    </div>
+
+                    <div class="project-card-footer">
+                        <a href="dhruv-work-bhasha.html" class="learn-more">Learn more</a>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Tkinter</span>
+                            <span class="tag">deep-translator</span>
+                        </div>
                     </div>
                 </div>
 
@@ -140,26 +201,103 @@
             <div class="connect-sub">Whether it's an internship, a collaboration, or just a curious
                 conversation<br>about AI — I'm always open.</div>
 
-            <div class="email-display" id="emailToCopy">dhruvlohchab22@gmail.com</div>
-            <button class="hero-btn" id="copyBtn" onclick="copyEmail()" style="background: transparent;">COPY EMAIL
-                ADDRESS</button>
+            <div class="connect-grid">
+                <!-- Left Column: Contact Cards -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Email Card -->
+                    <div class="contact-card" style="cursor: default;">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <h4>Email</h4>
+                            <p id="emailToCopy">danesdave2023@gmail.com</p>
+                        </div>
+                        <button class="contact-copy-btn" id="copyBtn" onclick="copyEmail()" title="Copy Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
 
-            <div class="social-footer">
-                <a href="https://www.linkedin.com/in/dhruv-lohchab" target="_blank">LinkedIn</a>
-                <a href="https://github.com/DaveDanes" target="_blank">GitHub</a>
+                    <!-- LinkedIn Card -->
+                    <a href="https://www.linkedin.com/in/dhruv-lohchab" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <h4>LinkedIn</h4>
+                            <p>linkedin.com/in/dhruv-lohchab</p>
+                        </div>
+                    </a>
+
+                    <!-- GitHub Card -->
+                    <a href="https://github.com/DaveDanes" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <h4>GitHub</h4>
+                            <p>github.com/DaveDanes</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right Column: Contact Form -->
+                <form action="#" class="contact-form-container"
+                    onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Message" class="form-input" required></textarea>
+                    </div>
+                    <div style="text-align: left;">
+                        <button type="submit" class="form-submit-btn">Send Message</button>
+                    </div>
+                </form>
             </div>
         </section>
 
     </div>
 
-    <button class="floating-chat-btn" onclick="toggleChat()">✨</button>
+    <button class="floating-chat-btn" onclick="toggleChat()" aria-label="Open Recruiter Assistant Chatbot">✨</button>
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <span>System Agent</span>
             <span onclick="toggleChat()" style="cursor:pointer;">[ CLOSE ]</span>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="message bot">System active. Ask me about Dhruv's skills, background, or projects.</div>
+            <div class="message bot">The Chatbot is resting ! Pls feel free to mail me at danesdave2023@gmail.com</div>
             <div class="message bot typing" id="typingIndicator" style="display: none;">Processing...</div>
         </div>
         <div class="chat-input-area">

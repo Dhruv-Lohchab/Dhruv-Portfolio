@@ -54,34 +54,56 @@ async function fetchGemini(prompt, system) {
 
 // Copy Email using modern navigator.clipboard API
 function copyEmail() {
-    const email = "dhruvlohchab22@gmail.com";
+    const email = "danesdave2023@gmail.com";
     const btn = document.getElementById('copyBtn');
+    
+    // Save original SVG and title
+    const originalIcon = btn.innerHTML;
+    const originalTitle = btn.getAttribute('title') || 'Copy Email';
+    
+    const checkIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" style="color: #4ade80;">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+    `;
+    
+    const failIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" style="color: #ef4444;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+    `;
+
+    function showFeedback(success) {
+        btn.innerHTML = success ? checkIcon : failIcon;
+        btn.setAttribute('title', success ? 'Copied!' : 'Failed to copy');
+        setTimeout(() => {
+            btn.innerHTML = originalIcon;
+            btn.setAttribute('title', originalTitle);
+        }, 2000);
+    }
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email)
-            .then(() => {
-                btn.innerHTML = "COPIED TO CLIPBOARD";
-            })
-            .catch(() => {
-                btn.innerHTML = "FAILED TO COPY";
-            })
-            .finally(() => {
-                setTimeout(() => { btn.innerHTML = "COPY EMAIL ADDRESS"; }, 2500);
-            });
+            .then(() => showFeedback(true))
+            .catch(() => showFeedback(false));
     } else {
-        // Fallback for older browsers
         const textArea = document.createElement("textarea");
         textArea.value = email;
         document.body.appendChild(textArea);
         textArea.select();
         try {
             document.execCommand('copy');
-            btn.innerHTML = "COPIED TO CLIPBOARD";
+            showFeedback(true);
         } catch (err) {
-            btn.innerHTML = "FAILED TO COPY";
+            showFeedback(false);
         }
         document.body.removeChild(textArea);
-        setTimeout(() => { btn.innerHTML = "COPY EMAIL ADDRESS"; }, 2500);
     }
 }
 
@@ -92,7 +114,18 @@ async function analyzeFit() {
     const resultDiv = document.getElementById('matchResult');
     const content = document.getElementById('matchContent');
     
-    if (!jd) return;
+    if (!jd) {
+        content.innerText = "Please paste a job description into the text area above to analyze our compatibility!";
+        resultDiv.style.display = 'block';
+        return;
+    }
+
+    if (!apiKey) {
+        content.innerText = "The PlayGround is underdevlopment !";
+        resultDiv.style.display = 'block';
+        return;
+    }
+    
     btn.innerText = "✨ PROCESSING...";
     btn.disabled = true;
 
@@ -123,6 +156,14 @@ async function sendMessage() {
     const typingIndicator = document.getElementById('typingIndicator');
     typingIndicator.style.display = 'block';
 
+    if (!apiKey) {
+        setTimeout(() => {
+            typingIndicator.style.display = 'none';
+            addMsg("The Chatbot is resting ! Pls feel free to mail me at danesdave2023@gmail.com", 'bot');
+        }, 800);
+        return;
+    }
+
     const system = `You are a system agent representing Dhruv. Answer questions concisely using this context: ${dhruvContext}. Tone: Direct, professional, minimal.`;
     try {
         const res = await fetchGemini(text, system);
@@ -130,7 +171,7 @@ async function sendMessage() {
         addMsg(res, 'bot');
     } catch(e) { 
         typingIndicator.style.display = 'none';
-        addMsg(`Error: ${e.message || "Connection interrupted."}`, 'bot'); 
+        addMsg("The Chatbot is resting ! Pls feel free to mail me at danesdave2023@gmail.com", 'bot'); 
     }
 }
 
@@ -199,4 +240,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentTheme = localStorage.getItem('theme') || 'dark';
         btn.innerHTML = currentTheme === 'light' ? sunIcon : moonIcon;
     }
+    initSectionPerformance();
 });
+
+// Section performance optimization - unloads/clears rendering memory for offscreen sections
+function initSectionPerformance() {
+    const sections = document.querySelectorAll('section, .about-profile-grid, .about-values-section, .about-outside');
+    if (!('IntersectionObserver' in window)) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('section-offscreen');
+            } else {
+                entry.target.classList.add('section-offscreen');
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '150px 0px 150px 0px',
+        threshold: 0
+    });
+    
+    sections.forEach(sec => observer.observe(sec));
+}

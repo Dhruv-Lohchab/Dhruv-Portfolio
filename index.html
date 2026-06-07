@@ -317,16 +317,18 @@
     <button class="floating-chat-btn" aria-label="Open Recruiter Assistant Chatbot">✨</button>
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
-            <span>System Agent</span>
-            <span id="closeChatBtn" style="cursor:pointer;">[ CLOSE ]</span>
+            <span style="display: flex; align-items: center; gap: 8px;">
+                <span class="bot-avatar">🤖</span> D-Buddy
+            </span>
+            <span id="closeChatBtn" style="cursor:pointer; font-size: 1.5rem; line-height: 0.5;">&times;</span>
         </div>
         <div class="chat-messages" id="chatMessages">
             <div class="message bot">The Chatbot is resting! Please feel free to email me at danesdave2023@gmail.com.</div>
             <div class="message bot typing" id="typingIndicator" style="display: none;">Processing...</div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Query agent...">
-            <span id="sendChatBtn" style="cursor:pointer; font-weight: bold;">[ SEND ]</span>
+            <input type="text" id="chatInput" placeholder="Ask D-Buddy a question...">
+            <span id="sendChatBtn" style="cursor:pointer; font-weight: bold; font-size: 1.2rem; color: var(--accent);">➤</span>
         </div>
     </div>
 

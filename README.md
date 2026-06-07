@@ -1,11 +1,10 @@
-# Dhruv
+# Dhruv 
 
 > **Building intelligent systems that understand humans and bridging the gap between AI and human interaction.**
 
 Welcome to the source code of my personal portfolio. This is a custom-built, interactive, and highly optimized web experience designed to showcase my expertise in Front-End Development, UI/UX Design, and Applied Artificial Intelligence (LLMs & Semantic Search).
 
 🔗 **Live Portfolio:** [dhruv-portfolio-black.vercel.app](https://dhruv-portfolio-black.vercel.app/)
-
 ---
 
 ## 🚀 Key Features

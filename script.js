@@ -44,6 +44,38 @@ async function fetchGemini(prompt, currentPage, visitedPages) {
     }
 }
 
+async function fetchPlaygroundAnalysis(prompt) {
+    const url = '/api/analyze';
+    const body = { prompt };
+
+    for (let delay of [1000, 2000, 4000]) {
+        try {
+            const res = await fetch(url, { 
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body) 
+            });
+
+            if (res.status === 404) {
+                throw new Error("Backend API missing. You must run this using 'npx vercel dev' locally to enable the AI.");
+            }
+
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                throw new Error(errData.error || `Server Error: HTTP ${res.status}`);
+            }
+
+            const data = await res.json();
+            return data;
+        } catch (e) {
+            if (delay === 4000) throw e; 
+            await new Promise(r => setTimeout(r, delay));
+        }
+    }
+}
+
 // Copy Email using modern navigator.clipboard API
 function copyEmail() {
     const email = "danesdave2023@gmail.com";
@@ -99,16 +131,74 @@ function copyEmail() {
     }
 }
 
+// Securely parses simple Markdown (bold, code, lists, and newlines) while escaping any HTML to prevent XSS
+function formatMarkdown(text) {
+    if (!text) return "";
+    
+    // 1. Escape HTML characters to protect against XSS
+    let escaped = text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    // 2. Parse inline code: `code` -> <code>code</code>
+    escaped = escaped.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+    // 3. Parse bold text: **text** or __text__ -> <strong>text</strong>
+    escaped = escaped.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    escaped = escaped.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+
+    // 4. Parse italic text: *text* or _text_ -> <em>text</em>
+    escaped = escaped.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    escaped = escaped.replace(/_([^_]+)_/g, "<em>$1</em>");
+
+    // 5. Parse bullet lists: lines starting with '*' or '-' followed by a space
+    const lines = escaped.split('\n');
+    let inList = false;
+    const formattedLines = [];
+
+    for (let line of lines) {
+        const trimmed = line.trim();
+        // Match bullet lists starting with *, -, or •
+        const bulletMatch = trimmed.match(/^[\*\-\u2022]\s+(.*)/);
+        if (bulletMatch) {
+            if (!inList) {
+                formattedLines.push('<ul class="response-list" style="margin-left: 1.5rem; margin-bottom: 0.5rem; list-style-type: disc;">');
+                inList = true;
+            }
+            formattedLines.push(`<li style="margin-bottom: 0.25rem;">${bulletMatch[1]}</li>`);
+        } else {
+            if (inList) {
+                formattedLines.push('</ul>');
+                inList = false;
+            }
+            formattedLines.push(line);
+        }
+    }
+    if (inList) {
+        formattedLines.push('</ul>');
+    }
+
+    // Join with <br> for newlines (outside of list tags)
+    return formattedLines.join('<br>');
+}
+
 // Role Fit Analyzer
 async function analyzeFit() {
-    const jd = document.getElementById('jdInput').value;
+    const jd = document.getElementById('jdInput').value.trim();
     const btn = document.getElementById('analyzeBtn');
     const resultDiv = document.getElementById('matchResult');
-    const content = document.getElementById('matchContent');
+    
+    const scoreCircle = document.getElementById('scoreCircle');
+    const scoreText = document.getElementById('scoreText');
+    const summaryText = document.getElementById('matchSummaryText');
+    const strengthsList = document.getElementById('matchStrengthsList');
+    const gapsList = document.getElementById('matchGapsList');
     
     if (!jd) {
-        content.innerText = "Please paste a job description into the text area above to analyze our compatibility!";
-        resultDiv.style.display = 'block';
+        alert("Please paste a job description into the text area above to analyze compatibility!");
         return;
     }
     
@@ -116,14 +206,48 @@ async function analyzeFit() {
     btn.disabled = true;
     
     try {
-        const response = await fetchGemini(`JD: ${jd}`, currentPage, visitedPages);
-        content.innerText = response;
+        const responseData = await fetchPlaygroundAnalysis(jd);
+        
         resultDiv.style.display = 'block';
+        
+        const score = responseData.compatibilityScore || 0;
+        scoreText.innerText = `${score}%`;
+        
+        if (scoreCircle) {
+            const radius = scoreCircle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            scoreCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            const offset = circumference - (score / 100) * circumference;
+            scoreCircle.style.strokeDashoffset = offset;
+        }
+        
+        summaryText.innerHTML = formatMarkdown(responseData.summary || "");
+        
+        strengthsList.innerHTML = "";
+        const strengths = responseData.keyStrengths || [];
+        strengths.forEach(str => {
+            const li = document.createElement('li');
+            li.innerHTML = formatMarkdown(str);
+            strengthsList.appendChild(li);
+        });
+        
+        gapsList.innerHTML = "";
+        const gaps = responseData.areasOfGrowth || [];
+        gaps.forEach(gap => {
+            const li = document.createElement('li');
+            li.innerHTML = formatMarkdown(gap);
+            gapsList.appendChild(li);
+        });
+        
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
     } catch (e) { 
         console.error("Playground Error:", e);
-        content.innerText = `Error: ${e.message}\n\nPlease email me directly at danesdave2023@gmail.com.`;
-        resultDiv.style.display = 'block';
-    } finally { btn.innerText = "✨ ANALYZE ALIGNMENT"; btn.disabled = false; }
+        alert(`Oops! D-Buddy is currently taking a coffee break. (Details: ${e.message})`);
+    } finally { 
+        btn.innerText = "✨ ANALYZE ALIGNMENT"; 
+        btn.disabled = false; 
+    }
 }
 
 
@@ -147,7 +271,7 @@ async function sendMessage() {
     } catch(e) { 
         console.error("Chatbot response error:", e);
         typingIndicator.style.display = 'none';
-        addMsg(`Error: ${e.message}`, 'bot'); 
+        addMsg(`Oops! D-Buddy is currently taking a coffee break. (System Details: ${e.message}). Please reach out via email!`, 'bot'); 
     }
 }
 
@@ -155,7 +279,7 @@ function addMsg(t, s) {
     const m = document.getElementById('chatMessages');
     const d = document.createElement('div');
     d.className = `message ${s}`;
-    d.innerText = t;
+    d.innerHTML = formatMarkdown(t);
     m.insertBefore(d, document.getElementById('typingIndicator'));
     m.scrollTop = m.scrollHeight;
 }

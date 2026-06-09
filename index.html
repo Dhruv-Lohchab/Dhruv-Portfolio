@@ -69,10 +69,10 @@
             <a href="Dhruv_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
             <a href="#playground">Playground</a>
             <a href="about.html">About Me</a>
+            <a href="#connect">Get in touch</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <span class="theme-emoji">🌞</span>
             </button>
-            <a href="#connect">Get in touch</a>
         </div>
     </nav>
 
@@ -228,10 +228,40 @@
                 <button class="hero-btn" id="analyzeBtn"
                     style="margin: 0; background: transparent;">✨ Analyze Alignment</button>
 
-                <div id="matchResult" class="match-result">
-                    <div style="margin-bottom: 10px; font-weight: 500; text-transform: uppercase; font-size: 0.85rem;">
-                        System Output</div>
-                    <div id="matchContent" style="font-size: 1.1rem; font-weight: 300; white-space: pre-wrap;"></div>
+                <div id="matchResult" class="match-result" style="display: none;">
+                    <div style="margin-bottom: 20px; font-weight: 500; text-transform: uppercase; font-size: 0.85rem; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; color: var(--text-muted);">
+                        ✨ Role Compatibility Dashboard</div>
+                    <div class="match-dashboard">
+                        <!-- Score Circular Ring -->
+                        <div class="match-score-container">
+                            <div class="match-score-radial">
+                                <svg class="progress-ring" width="120" height="120">
+                                    <circle class="progress-ring-circle-bg" stroke="var(--border-light)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                                    <circle class="progress-ring-circle" id="scoreCircle" stroke="var(--accent)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                                </svg>
+                                <div class="match-score-text" id="scoreText">0%</div>
+                            </div>
+                            <div class="match-score-label">Compatibility Match</div>
+                        </div>
+                        
+                        <!-- Summary -->
+                        <div class="match-summary-section">
+                            <h3>Alignment Summary</h3>
+                            <p id="matchSummaryText" style="font-size: 1.05rem; font-weight: 300; line-height: 1.6;"></p>
+                        </div>
+                        
+                        <!-- Detailed Strengths & Gaps Columns -->
+                        <div class="match-details-grid">
+                            <div class="match-column strengths-col">
+                                <h4>✨ Key Strengths</h4>
+                                <ul id="matchStrengthsList"></ul>
+                            </div>
+                            <div class="match-column gaps-col">
+                                <h4>🎯 Areas of Growth</h4>
+                                <ul id="matchGapsList"></ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
